@@ -27,7 +27,7 @@ def call() {
         stage('Quality Control') {
           steps {
             withAWSParameterStore(credentialsId: '', naming: 'relative', path: '/service', recursive: true, regionName: 'eu-west-1') {
-              echo "${env.SONARQUBE_USER}"
+              echo "USER = ${env.SONARQUBE_USER}"
               }
 
             //sh 'sonar-scanner -Dsonar.host.url=http://172.31.11.33:9000 -Dsonar.login=admin -Dsonar.password=admin123 -Dsonar.projectKey=cart'
