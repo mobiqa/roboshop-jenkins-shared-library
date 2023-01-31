@@ -2,6 +2,10 @@ def call() {
   try {
     node('workstation') {
 
+      stage('CleanUp') {
+        cleanWs()
+      }
+
       stage('Compile/Build') {
         common.compile()
       }
@@ -23,8 +27,10 @@ def call() {
       }
 
 
+
+
     }
-    
+
   } catch(Exception e) {
     common.email("Failed")
   }
