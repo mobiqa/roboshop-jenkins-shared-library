@@ -4,12 +4,19 @@ def call() {
         env.SONAR_EXTRA_OPTS = " "
     }
 
+    if(!env.TAG_NAME) {
+        env.PUSH_CODE = "false"
+    } else {
+        env.PUSH_CODE = "true"
+    }
+
     try {
         node('workstation') {
 
             stage('Checkout') {
                 cleanWs()
                 git branch: 'main', url: "https://github.com/mobiqa/${component}"
+                sh 'env'
             }
 
             stage('Compile/Build') {
@@ -28,10 +35,11 @@ def call() {
                 }
             }
 
-            stage('Upload Code to Centralized Place') {
-                echo 'Upload'
+            if(env.PUSH_CODE == "true") {
+                stage('Upload Code to Centralized Place') {
+                    echo 'Upload'
+                }
             }
-
         }
 
     } catch(Exception e) {
