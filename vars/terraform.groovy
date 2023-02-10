@@ -4,7 +4,7 @@ def call() {
         options {
             ansiColor('xterm')
         }
-        
+
         agent {
             node {
                 label 'workstation'
