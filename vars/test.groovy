@@ -9,9 +9,7 @@ def call() {
 
             stage('Compile/Build') {
                 steps {
-                    script {
-                        common.compile()
-                    }
+                    echo 'Unit Tests'
                 }
             }
 
