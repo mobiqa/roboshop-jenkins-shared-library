@@ -1,10 +1,6 @@
 def call() {
     pipeline {
 
-        options {
-            ansiColor('xterm')
-        }
-
         agent {
             node {
                 label 'workstation'
@@ -23,26 +19,28 @@ def call() {
                 }
             }
 
-            stage('Terraform Apply') {
-                steps {
-                    sh "terraform apply -auto-approve -var-file=env-${INFRA_ENV}/main.tfvars"
-                }
-            }
-
-        }
-
-        stage('Terraform Apply') {
-            steps {
-                sh "terraform apply -auto-approve -var-file=env-${INFRA_ENV}/main.tfvars"
-            }
-        }
-
-        post {
-            always {
-                cleanWs()
-            }
         }
 
 
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
