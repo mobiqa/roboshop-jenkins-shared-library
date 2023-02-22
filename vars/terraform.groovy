@@ -1,7 +1,7 @@
 def call() {
     pipeline {
 
-        options{
+        options {
             ansiColor('xterm')
         }
 
@@ -13,6 +13,7 @@ def call() {
 
         parameters {
             string(name: 'INFRA_ENV', defaultValue: '', description: 'Enter Env like dev or prod')
+            choice(name: 'ACTION', choices: ['apply' , 'destroy'], description: 'Action')
         }
 
         stages {
@@ -23,45 +24,20 @@ def call() {
                 }
             }
 
-        }
-
-
-
             stage('Terraform Apply') {
                 steps {
-                    sh "terraform apply -auto-approve -var-file=env-${INFRA_ENV}/main.tfvars"
+                    sh "terraform ${ACTION} -auto-approve -var-file=env-${INFRA_ENV}/main.tfvars"
                 }
             }
 
         }
-       post {
-         always{
 
-             cleanWs()
-         }
-
-       }
+        post {
+            always {
+                cleanWs()
+            }
+        }
 
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
