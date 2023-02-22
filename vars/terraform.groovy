@@ -25,7 +25,7 @@ def call() {
 
         }
 
-        stages {
+
 
             stage('Terraform Apply') {
                 steps {
@@ -44,7 +44,7 @@ def call() {
 
 
     }
-}
+
 
 
 
