@@ -25,6 +25,23 @@ def call() {
 
         }
 
+        stages {
+
+            stage('Terraform Apply') {
+                steps {
+                    sh "terraform apply -auto-approve -var-file=env-${INFRA_ENV}/main.tfvars"
+                }
+            }
+
+        }
+       post {
+         always{
+
+             cleanWs()
+         }
+
+       }
+
 
     }
 }
