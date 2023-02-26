@@ -19,14 +19,10 @@ def call() {
                 stage('Unit Tests') {
                     steps {
                         script {
-                            withAWSParameterStore(credentialsId: '', naming: 'relative', path: '/service', recursive: true, regionName: 'eu-west-1') {
-                                echo 'hello'
-                            }
-
+                            common.unittests()
                         }
                     }
                 }
-
 
                 stage('Quality Control') {
                     environment {
