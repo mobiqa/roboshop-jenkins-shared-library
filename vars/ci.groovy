@@ -19,15 +19,23 @@ def call() {
                 stage('Unit Tests') {
                     steps {
                         script {
-                            common.unittests()
+                            withAWSParameterStore(credentialsId: '', naming: 'relative', path: '/service', recursive: true, regionName: 'eu-west-1') {
+                                echo 'hello'
+                            }
+
                         }
                     }
                 }
 
                 stage('Quality Control') {
                     steps {
-                        echo 'Quality Control'
+                        SONAR_PASS = sh ( script: 'aws ssm get-parameters --region us-east-1 --names sonarqube.pass  --with-decryption --query Parameters[0].Value | sed \'s/"//g\'', returnStdout: true).trim()
+                        SONAR_USER = sh ( script: 'aws ssm get-parameters --region us-east-1 --names sonarqube.user  --with-decryption --query Parameters[0].Value | sed \'s/"//g\'', returnStdout: true).trim()
+                        echo 'sonar scanner'
+                        sh 'sonar-scanner -Dsonar.host.url=http://44.204.214.134:9000 -Dsonar.login=admin -Dsonar.password=admin123 -Dsonar.projectKey=cart'
+
                     }
+
                 }
 
                 stage('Upload Code to Centralized Place') {
