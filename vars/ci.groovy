@@ -1,28 +1,19 @@
 def call() {
     try {
-        pipeline {
+        node('workstation') {
 
-            agent {
-                label 'workstation'
+            stage('Checkout') {
+                cleanWs()
+                git branch: 'main', url: "https://github.com/raghudevopsb70/${component}"
             }
 
-            stages {
+            stage('Compile/Build') {
+                common.compile()
+            }
 
-                stage('Compile/Build') {
-                    steps {
-                        script {
-                            common.compile()
-                        }
-                    }
-                }
-
-                stage('Unit Tests') {
-                    steps {
-                        script {
-                            common.unittests()
-                        }
-                    }
-                }
+            stage('Unit Tests') {
+                common.unittests()
+            }
 
                 stage('Quality Control') {
                     environment {
@@ -36,11 +27,8 @@ def call() {
                 }
 
                 stage('Upload Code to Centralized Place') {
-                    steps {
-                        echo 'Upload'
-                    }
-                }
 
+                        echo 'Upload'
 
             }
 
