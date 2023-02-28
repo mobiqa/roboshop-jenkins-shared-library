@@ -1,19 +1,28 @@
 def call() {
     try {
-        node('workstation') {
+        pipeline {
 
-            stage('Checkout') {
-                cleanWs()
-                git branch: 'main', url: "https://github.com/mobiqa/${component}"
+            agent {
+                label 'workstation'
             }
 
-            stage('Compile/Build') {
-                common.compile()
-            }
+            stages {
 
-            stage('Unit Tests') {
-                common.unittests()
-            }
+                stage('Compile/Build') {
+                    steps {
+                        script {
+                            common.compile()
+                        }
+                    }
+                }
+
+                stage('Unit Tests') {
+                    steps {
+                        script {
+                            common.unittests()
+                        }
+                    }
+                }
 
                 stage('Quality Control') {
                     environment {
@@ -22,13 +31,16 @@ def call() {
                     }
                     steps {
 
-                        sh "sonar-scanner -Dsonar.host.url=http://172.31.7.166:9000 -Dsonar.login=${SONAR_USER} -Dsonar.password=${SONAR_PASS} -Dsonar.projectKey={component}"
+                        sh "sonar-scanner -Dsonar.host.url=http://172.31.7.166:9000 -Dsonar.login=${SONAR_USER} -Dsonar.password=${SONAR_PASS} -Dsonar.projectKey=catalogue"
                     }
                 }
 
                 stage('Upload Code to Centralized Place') {
-
+                    steps {
                         echo 'Upload'
+                    }
+                }
+
 
             }
 
