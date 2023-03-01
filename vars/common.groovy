@@ -28,5 +28,5 @@ def unittests() {
 }
 
 def email(email_note) {
-    mail bcc: '', body: 'Job Failed : ', cc: '', from: 'devopsmobiqa@gmail.com', replyTo: '', subject: 'TEST FROM JENKINS', to: 'devopsmobiqa@gmail.com'
+    mail bcc: '', body: "Job Failed - ${JOB_BASE_NAME}\nJenkins URL - ${JOB_URL}", cc: '', from: 'devopsmobiqa@gmail.com', replyTo: '', subject: "Jenkins Job Failed - ${JOB_BASE_NAME}", to: 'devopsmobiqa@gmail.com'
 }
