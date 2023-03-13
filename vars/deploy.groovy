@@ -10,6 +10,10 @@ def call() {
       string(name: 'APP_VERSION', defaultValue: '', description: 'Enter application version to deploy')
     }
 
+    options {
+      ansiColor('xterm')
+    }
+
     stages {
 
       stage('Run Deployment') {
