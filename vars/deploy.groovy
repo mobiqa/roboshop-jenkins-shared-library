@@ -6,8 +6,8 @@ def call() {
 
     parameters {
       string(name: 'APP_ENV', defaultValue: '', description: 'Enter Env like dev or prod')
-      choice(name: 'COMPONENT', defaultValue: '', description: 'Enter component name')
-      choice(name: 'APP_VERSION', defaultValue: '', description: 'Enter application version to deploy')
+      string(name: 'COMPONENT', defaultValue: '', description: 'Enter component name')
+      string(name: 'APP_VERSION', defaultValue: '', description: 'Enter application version to deploy')
     }
 
     stages {
