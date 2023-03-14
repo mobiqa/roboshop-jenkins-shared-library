@@ -26,7 +26,7 @@ def call() {
             aws ssm put-parameter --name "${APP_ENV}.${COMPONENT}.APP_VERSION" --type "String" --value "${APP_VERSION}" --overwrite
             
             # this is for immutable approach 
-            aws autoscaling start-instance-refresh --auto-scaling-group-name ${ENV}-${COMPONENT}  --preferences '{"InstanceWarmup": 240, "MinHealthyPercentage": 90, "SkipMatching": false}' 
+            aws autoscaling start-instance-refresh --auto-scaling-group-name ${APP_ENV}-${COMPONENT}  --preferences '{"InstanceWarmup": 240, "MinHealthyPercentage": 90, "SkipMatching": false}' 
             
             ## These are for mutable approach 
             #aws ec2 describe-instances     --filters "Name=tag:Name,Values=${APP_ENV}-${COMPONENT}"  | jq ".Reservations[].Instances[].PrivateIpAddress" >/tmp/hosts
