@@ -6,8 +6,7 @@ def compile() {
 //  if (app_lang == "maven") {
 //    sh "mvn clean compile"
 //  }
-
-    docker build -t ${component} . 
+    sh "docker build -t ${component} . "
 }
 
 def unittests() {
