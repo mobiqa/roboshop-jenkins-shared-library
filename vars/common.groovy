@@ -4,7 +4,7 @@ def compile() {
   }
 
   if (app_lang == "maven") {
-    sh "mvn clean compile"
+    sh "mvn clean compile package"
   }
     sh "docker build -t 633788536644.dkr.ecr.us-east-1.amazonaws.com/${component}:${TAG_NAME} . "
 }
