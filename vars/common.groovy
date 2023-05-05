@@ -6,7 +6,7 @@ def compile() {
   if (app_lang == "maven") {
     sh "mvn clean compile package"
   }
-    sh "docker build -t 633788536644.dkr.ecr.us-east-1.amazonaws.com/${component}:${TAG_NAME} . "
+    sh "docker build -t 855509773460.dkr.ecr.us-east-1.amazonaws.com/${component}:${TAG_NAME} . "
 }
 
 def unittests() {
@@ -31,8 +31,8 @@ def email(email_note) {
 }
 
 def artifactPush() {
-  sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 633788536644.dkr.ecr.us-east-1.amazonaws.com"
-  sh "docker push 633788536644.dkr.ecr.us-east-1.amazonaws.com/${component}:${TAG_NAME}"
+  sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 855509773460.dkr.ecr.us-east-1.amazonaws.com"
+  sh "docker push 855509773460.dkr.ecr.us-east-1.amazonaws.com/${component}:${TAG_NAME}"
 //  sh "echo ${TAG_NAME} >VERSION"
 //
 //  if (app_lang == "nodejs") {
