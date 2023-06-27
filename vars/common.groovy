@@ -8,6 +8,9 @@ def compile() {
   }
   sh "docker build -t 136325909517.dkr.ecr.us-east-1.amazonaws.com/${component}:${TAG_NAME} . "
 
+// sh "docker build -t ${component} . "
+
+
 
 }
 
