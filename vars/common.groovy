@@ -7,7 +7,7 @@ def compile() {
     sh "mvn clean compile"
   }
 //  sh "docker build -t 136325909517.dkr.ecr.us-east-1.amazonaws.com/${component}:${TAG_NAME} . "
-  sh "docker build -t 136325909517.dkr.ecr.us-east-1.amazonaws.com/${component}:${TAG_NAME} . "
+  sh "docker build -t public.ecr.aws/x6k5w0n6/${component}:${TAG_NAME} . "
 
 // sh "docker build -t ${component} . "
 
@@ -38,8 +38,8 @@ def email(email_note) {
 
 def artifactPush() {
 
-  sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 136325909517.dkr.ecr.us-east-1.amazonaws.com"
-  sh "docker push 136325909517.dkr.ecr.us-east-1.amazonaws.com/${component}:${TAG_NAME}"
+  sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/x6k5w0n6"
+  sh "docker push public.ecr.aws/x6k5w0n6/${component}:${TAG_NAME}"
 
 
 
