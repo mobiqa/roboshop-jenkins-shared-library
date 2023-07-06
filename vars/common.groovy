@@ -38,7 +38,8 @@ def email(email_note) {
 
 def artifactPush() {
 
-  sh "aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/n8g7b3k8"
+//  sh "aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/n8g7b3k8"
+ sh "aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/n8g7b3k8"
   sh "docker push public.ecr.aws/n8g7b3k8/${component}:${TAG_NAME}"
 
 
